@@ -1,6 +1,5 @@
 package com.LinkShorter.Controllers;
 
-import com.LinkShorter.Entities.GenerateRequest;
 import com.LinkShorter.Entities.Link;
 import com.azure.cosmos.CosmosAsyncClient;
 import com.azure.cosmos.CosmosAsyncContainer;
@@ -10,10 +9,6 @@ import com.azure.cosmos.models.CosmosDatabaseResponse;
 import com.azure.cosmos.models.CosmosItemResponse;
 import com.azure.cosmos.models.PartitionKey;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class AzureCosmosDBController {
     private static final String ENDPOINT = "https://linksshorter.documents.azure.com:443/";

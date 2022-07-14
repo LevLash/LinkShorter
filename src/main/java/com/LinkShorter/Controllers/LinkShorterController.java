@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.nio.charset.StandardCharsets;
 
@@ -24,7 +26,7 @@ public class LinkShorterController {
 		final String url = req.getLink();
 		final UrlValidator urlValidator = new UrlValidator(new String[]{"http", "https"});
 		if (urlValidator.isValid(url)) {
-			final String id = Hashing.murmur3_32().hashString(url, StandardCharsets.UTF_8).toString();
+			final String id = Hashing.murmur3_32_fixed().hashString(url, StandardCharsets.UTF_8).toString();
 			cosmosDB.addLink(new Link(id, url));
 			return new ResponseEntity<>("http://localhost:8080/" + id, HttpStatus.OK);
 		} else
